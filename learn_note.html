@@ -1,0 +1,42 @@
+=> html
+<html>
+//@css_variables
+<label for="spacing">Spacing:</label> //for屬性表示與哪個表單(id)連結
+<input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+
+</html>
+
+=> css
+<style type="text/css">
+.clock {
+    border: 20px solid black // 邊框： 寬度 實線 黑色
+    border-radius: 50% //邊框圓角： 圓形
+    padding: 2rem; //內距
+
+    //參考點預設為box中心，50% 50%
+    transform: translateY(-3px); //變形： 由參考點縱向移動, 左上角為(0,0)
+    transform: rotate(90deg); //變形： 由參考點2D旋轉角度
+    transform-origin: right; //改變參考點: 右邊
+
+    transition: all 0.5s; // 轉場：全部 0.5sec
+    transition-timing-function: cubic-bezier(0, 1.46, 0.86, 1.89); //漸變轉場： 貝茲曲線（有預先定義好的）
+}
+
+.css_variables {
+    :root {--base: #ffc600;} //宣告CSS變數
+    background: var(--base); //帶入CSS變數
+    filter: blur(var(--blur)); //濾鏡： 模糊
+}
+</style>
+
+=> javascript
+<script type="">
+//@clock
+const hrHand = document.querySelector(`.hour-hand`); //回傳符合的第一個元素, //querySelector （靜態,Selectors API,慢,相容）getElementsByClassName（動態,DOM,快）& another differents
+const tick = setInterval(updateTime, 1000); //計時器，會一直跑，除非手動移除，clearInterval(tick)
+hrHand.style.transform = `translateY(-3px) rotate(${hrDeg}deg)`; //讀取and設定 DOM > style > transform 值, //Template String 樣板字串 >>> `${}` 來插入變數
+
+//@css_variables
+input.addEventListener('change', handleUpdate)); //target.addEventListener(type, listener);
+document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix); //會回傳目前文件（document）中的根元素（Element）, 如：HTML 文件中的 <html> 元素。
+</script>
