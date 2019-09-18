@@ -14,10 +14,12 @@
 <style type="text/css">
 .js_drum_kit {
 
-    body,html {
+    body,
+    html {
         margin: 0; //讓四周不會留白
         padding: 0;
     }
+
     background-size: cover; //使背景圖放大至內容的大小
     font-family: sans-serif; //字型粗體
     display: flex; //彈性盒子 ＊＊＊
@@ -49,7 +51,7 @@
 </style>
 => javascript
 <script type="">
-//@clock
+    //@clock
 const hrHand = document.querySelector(`.hour-hand`); //回傳符合的第一個元素, //querySelector （靜態,Selectors API,慢,相容）getElementsByClassName（動態,DOM,快）& another differents
 const tick = setInterval(updateTime, 1000); //計時器，會一直跑，除非手動移除，clearInterval(tick)
 hrHand.style.transform = `translateY(-3px) rotate(${hrDeg}deg)`; //讀取and設定 DOM > style > transform 值, //Template String 樣板字串 >>> `${}` 來插入變數
@@ -57,19 +59,67 @@ hrHand.style.transform = `translateY(-3px) rotate(${hrDeg}deg)`; //讀取and設�
 //@css_variables
 input.addEventListener('change', handleUpdate); //target.addEventListener(type, listener);
 document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix); //會回傳目前文件（document）中的根元素（Element）, 如：HTML 文件中的 <html> 元素。
+
+//@array_cardio_I
+var people = [
+  {name: 'Casper', like: '鍋燒意麵', age: 18},
+  {name: 'Wang', like: '炒麵', age: 24},
+  {name: 'Bobo', like: '蘿蔔泥', age: 1},
+  {name: '滷蛋', like: '蘿蔔泥', age: 3}];
+//filter() 會回傳一個陣列，其條件是 return 後方為 true 的物件，很適合用在搜尋符合條件的資料。
+var filterAgeThan5 = people.filter(function(item, index, array){
+  return item.age > 5;       // 取得大於五歲的
+});
+console.log(filterAgeThan5); // Casper, Wang 這兩個物件
+//find() 與 filter() 很像，但 find() 只會回傳一次值，且是第一次為 true 的值。
+var findAgeThan5 = people.find(function(item, index, array){
+  return item.age > 5;           // 取得大於五歲的
+});
+console.log(findAgeThan5);       // 雖然答案有兩個，但只會回傳 Casper 這一個物件
+//forEach 是這幾個陣列函式最單純的一個，不會額外回傳值，只單純執行每個陣列內的物件或值。
+people.forEach(function(item, index, array){
+  item.age = item.age + 1;         // forEach 就如同 for，不過寫法更容易
+});
+console.log(people);               // 全部 age + 1
+//使用 map() 時他需要回傳一個值，他會透過函式內所回傳的值組合成一個陣列。
+//如果不回傳則是 undefined
+//回傳數量等於原始陣列的長度
+//這很適合將原始的變數運算後重新組合一個新的陣列。
+var mapAgeThan5 = people.map(function(item, index, array){
+  return item.age > 5;    // 比較大於五歲的
+});
+console.log(mapAgeThan5); // [true, true, false, false]
+//every() 可以檢查所有的陣列是否符合條件，這僅會回傳一個值 true or false，可以用來檢查陣列中的內容是否符合特定條件。
+var ans = array.every(function(item, index, array){
+  console.log(item, index, array); // 物件, 索引, 全部陣列
+  return item.age > 10 // 當全部 age 大於 10 才能回傳 true
+});
+console.log(ans); // false: 只要有部分不符合，則為 false
+//some() 與 every() 非常接近，都是回傳 true or false，差異僅在 every() 需完全符合，some() 僅需要部分符合。
+var ans = people.some(function(item, index, array){
+  return item.age > 10 // 當全部 age 大於 10 才能回傳 true
+});
+//reduce() 和其他幾個差異就很大了，他可以與前一個回傳的值再次作運算，參數包含以下：
+//accumulator: 前一個參數，如果是第一個陣列的話，值是以另外傳入或初始化的值
+//currentValue: 當前變數
+//currentIndex: 當前索引
+//array: 全部陣列
+var reducePlus = people.reduce(function(accumulator, currentValue, currentIndex, array){
+  // 分別為前一個回傳值, 目前值, 當前索引值
+  console.log(accumulator, currentValue, currentIndex);
+  return accumulator + currentValue.age;  // 與前一個值相加
+}, 0);                                    // 傳入初始化值為 0
+console.log(reducePlus);                  // 總和為 
+
 </script>
 => git
 //modified & untracked
-git add <file> || git add -u
-
-//commit
-git commit -m "<message>"
-
-//push
-git push -u origin master || git push
-
-git status
-
-git show
-
-git log
+git add -u && git add <file> or git add --all  
+    //commit
+    git commit -m "<message>"
+        //push
+        git push -u origin master || git push
+        //
+        git status
+        git show
+        git log

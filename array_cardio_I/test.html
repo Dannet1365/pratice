@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+    const monkeys = [
+        { first: 'Andy', last: 'Tsai', banana: 18, bala: 12 },
+        { first: 'O', last: 'Tree', banana: 16, bala: 3 },
+        { first: 'Frog', last: 'X', banana: 23, bala: 14 },
+        { first: 'Penguin', last: 'Run', banana: 14, bala: 2 },
+        { first: 'Don', last: 'Slam', banana: 13, bala: 5 },
+    ];
+    // 挑出符合條件的猴子（香蕉芭樂數量）
+    const qualifiedMonkeys = monkeys.filter(monkey => monkey.banana > 10 && monkey.bala > 2);
+    console.table(`${qualifiedMonkeys}`);
+    // 顯示猴子的全名
+    const fullname = qualifiedMonkeys.map(monkey => `${monkey.first} ${monkey.last}`);
+    console.log(fullname);
+    // 依照香蕉數量排序
+    const bananaOrder = qualifiedMonkeys.sort((prev, next) => next.banana - prev.banana);
+    console.log(bananaOrder);
+    // 全部水果數量
+    const totalFruits = monkeys.reduce((total, monkey) => total + (monkey.banana + monkey.bala), 0);
+    console.log(totalFruits);
+    </script>
+</body>
+
+</html>
